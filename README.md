@@ -4,7 +4,10 @@ To use the module, download it and enter: `import Big_Numbers` in the python she
 ## BigInt
 A class for big integers.
 Use `BigInt(str)` to creat a BigInt object.
-For instance, `a = BigInt("-1234567890")`.
+For instance:
+```
+a = BigInt("-1234567890")
+```
 Now, the following calculations are available:
 ```
 len(a) # including the symbol '-'
@@ -22,3 +25,8 @@ a - b
 a * b
 ```
 Wait for more!
+_Note: Two constants are available: 
+```
+ZERO = BigInt("0")
+ONE = BigInt("1")
+```
