@@ -25,7 +25,7 @@ a - b
 a * b
 ```
 Wait for more!
-_Note: Two constants are available: _
+_Notes:_ Two constants are available: 
 ```
 ZERO = BigInt("0")
 ONE = BigInt("1")
