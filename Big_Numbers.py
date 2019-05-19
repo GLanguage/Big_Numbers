@@ -96,10 +96,6 @@ def simple_times(a, b):
         i += 1
     return prod_s
 
-def simple_floordiv(a, b):
-    levels = [b_nb_times(i, a) for i in range(10)]
-    i = len(b) - 1
-
 class BigInt:
     num = "0"
     def __init__(self, num):
