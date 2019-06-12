@@ -3,6 +3,11 @@ def negative(a):
         return a[1:]
     else:
         return "-" + a
+
+def less(a, b):
+    if len(a) == len(b):
+        return a < b
+    return len(a) < len(b)
     
 def bit_add(a, b):
     return str(int(a) + int(b))
@@ -60,10 +65,13 @@ def simple_minus(a, b):
         diff_s = bit_diff + diff_s
         i += 1
     length = len(diff_s)
-    for i in range(0, length):
+    for i in range(length):
         if diff_s[i] != "0":
+            diff_s = diff_s[i:]
             break
-        diff_s = diff_s[1:]
+        if i == length - 1:
+            diff_s = diff_s[-1]
+            break
     return diff_s
 
 def b_nb_times(a, b):
@@ -96,6 +104,37 @@ def simple_times(a, b):
         i += 1
     return prod_s
 
+def simple_floordiv(a, b):
+    levels = [b_nb_times(i, b) for i in range(10)]
+    i = len(b) - 1
+    q = ""
+    r = a[:i]
+    while True:
+        if i >= len(a):
+            break
+        if r != "0":
+            divor = r + a[i]
+        if less(divor, b):
+            r = divor
+            q += "0"
+            i += 1
+            continue
+        bit_q = 9
+        while less(divor, levels[bit_q]):
+            bit_q -= 1
+        r = simple_minus(divor, levels[bit_q])
+        q += str(bit_q)
+        i += 1
+    length = len(q)
+    for i in range(length):
+        if q[i] != "0":
+            q = q[i:]
+            break
+        if i == length - 1:
+            q = q[-1]
+            break
+    return (q, r)
+
 class BigInt:
     num = "0"
     def __init__(self, num):
@@ -114,9 +153,7 @@ class BigInt:
         negS = (self.num[0] == "-")
         negA = (a.num[0] == "-")
         if not negS and not negA:
-            if len(self) == len(a):
-                return self.num < a.num
-            return len(self) < len(a)
+            return less(self.num, a.num)
         elif negS and not negA:
             return True
         elif not negS and negA:
@@ -158,6 +195,15 @@ class BigInt:
             return -BigInt(simple_times(abs(self).num, ans(a).num))
         else:
             return ZERO
+    def __floordiv__(self, a):
+        if self < a:
+            return 0
+        if self == a:
+            return 1
+        q = BigInt(simple_floordiv(abs(self).num, abs(a).num))
+        if (self > ZERO and a < ZERO) or (self < ZERO and a > ZERO):
+            q = -q
+        return q
 
 ZERO = BigInt("0")
 ONE = BigInt("1")
