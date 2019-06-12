@@ -189,17 +189,17 @@ class BigInt:
     def __sub__(self, a):
         return self + (-a)
     def __mul__(self, a):
-        if (self > ZERO and a > ZERO) or (self < ZERO and a < ZERO):
-            return BigInt(simple_times(abs(self).num, abs(a).num))
-        elif (self > ZERO and a < ZERO) or (self < ZERO and a > ZERO):
-            return -BigInt(simple_times(abs(self).num, ans(a).num))
-        else:
+        if self == ZERO or a == ZERO:
             return ZERO
+        mult = BigInt(simple_times(abs(self).num, abs(a).num))
+        if (self > ZERO and a < ZERO) or (self < ZERO and a > ZERO):
+            mult = -mult
+        return mult
     def __floordiv__(self, a):
         if self < a:
-            return 0
+            return ZERO
         if self == a:
-            return 1
+            return ONE
         q = BigInt(simple_floordiv(abs(self).num, abs(a).num))
         if (self > ZERO and a < ZERO) or (self < ZERO and a > ZERO):
             q = -q
