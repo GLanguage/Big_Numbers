@@ -23,6 +23,8 @@ a >= b
 a + b
 a - b
 a * b
+a // b
+a % b
 ```
 Wait for more!  
 _Notes:_ Two constants are available: 
