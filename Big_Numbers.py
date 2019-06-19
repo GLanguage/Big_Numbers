@@ -200,10 +200,19 @@ class BigInt:
             return ZERO
         if self == a:
             return ONE
-        q = BigInt(simple_floordiv(abs(self).num, abs(a).num))
+        q = BigInt(simple_floordiv(abs(self).num, abs(a).num)).q
         if (self > ZERO and a < ZERO) or (self < ZERO and a > ZERO):
             q = -q
         return q
+    def __mod__(self, a):
+        if self < a:
+            return self
+        if self == a:
+            return ZERO
+        r = BigInt(simple_floordiv(abs(self).num, abs(a).num)).r
+        if self < ZERO:
+            r = -r
+        return r
 
 ZERO = BigInt("0")
 ONE = BigInt("1")
