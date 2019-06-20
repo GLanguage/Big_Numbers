@@ -196,7 +196,7 @@ class BigInt:
             mult = -mult
         return mult
     def __floordiv__(self, a):
-        if a == 0:
+        if a == ZERO:
             raise ZeroDivisionError
         if self < a:
             return ZERO
@@ -207,7 +207,7 @@ class BigInt:
             q = -q
         return q
     def __mod__(self, a):
-        if a == 0:
+        if a == ZERO:
             raise ZeroDivisionError
         if self < a:
             return self
