@@ -32,3 +32,5 @@ _Notes:_ Two constants are available:
 ZERO = BigInt("0")
 ONE = BigInt("1")
 ```
+## Errors
+`ZeroDivisionError` : When you are trying to divide a number by 0.
